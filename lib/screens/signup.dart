@@ -4,9 +4,6 @@ import 'package:login_log/components/alreadyReg.dart';
 import 'package:login_log/components/button_logSign.dart';
 import 'package:login_log/components/forgot_password.dart';
 import 'package:login_log/components/input_field.dart';
-import 'package:login_log/components/new_hereRegNow.dart';
-import 'package:login_log/components/no_icon_TextField.dart';
-import 'package:login_log/screens/login_Page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

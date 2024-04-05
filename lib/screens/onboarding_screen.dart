@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login_log/screens/login_Page.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:login_log/screens/introduction_screens/intro_1.dart';
 import 'package:login_log/screens/introduction_screens/intro_2.dart';
 import 'package:login_log/screens/introduction_screens/intro_3.dart';
+import 'package:login_log/screens/login_Page.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class onboarding extends StatefulWidget {
   const onboarding({Key? key}) : super(key: key);
@@ -45,16 +45,38 @@ class _onboardingState extends State<onboarding> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               //skip
-              Container(
-                child: GestureDetector(
-                  onTap: () {
-                    _controller.jumpToPage(2);
-                  },
-                  child: Text('Skip'),
-                ),
-              ),
-
-              //dot indicator
+              onLastPage
+                  //if true
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: const SizedBox(
+                        width: 100,
+                        child: Text('  '),
+                      ),
+                    )
+                  //if false
+                  : GestureDetector(
+                      onTap: () {
+                        _controller.nextPage(
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        );
+                      },
+                      child: const SizedBox(
+                        width: 100,
+                        child: Text('Skip'),
+                      ),
+                    ),
+              
               SmoothPageIndicator(
                 controller: _controller,
                 count: 3,
@@ -69,16 +91,23 @@ class _onboardingState extends State<onboarding> {
                   //if true
                   ? GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return LoginPage();
-                        }));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginPage();
+                            },
+                          ),
+                        );
                       },
-                      child: Text(
-                        'Get Started',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 135, 15, 15),
-                          fontWeight: FontWeight.bold,
+                      child: const SizedBox(
+                        width: 100,
+                        child: Text(
+                          'Get Started',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 135, 15, 15),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     )
@@ -90,8 +119,11 @@ class _onboardingState extends State<onboarding> {
                           curve: Curves.easeIn,
                         );
                       },
-                      child: Text('Next'),
-                    ),
+                      child: const SizedBox(
+                        width: 100,
+                        child: Text('Next'),
+                      ),
+                    )
             ],
           ),
         )
@@ -99,3 +131,4 @@ class _onboardingState extends State<onboarding> {
     ));
   }
 }
+// Color.fromARGB(255, 135, 15, 15),
